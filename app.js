@@ -1,5 +1,6 @@
 const express = require('express')
 const cron = require('node-cron')
+const mail = require('./jobs/mailSender')
 const app = express();
 
 app.get('/',(req,res,next)=> {
@@ -23,7 +24,7 @@ app.post('/reschedule',(req,res,next)=> {
 
 })
 cron.schedule("*/4 * * * * *",()=> {
-    console.log('running at every 4 second')
+    mail.sender()
 })
 app.listen(3000,()=> {
     console.log('listening on port 3000')
