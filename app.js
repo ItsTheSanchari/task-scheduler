@@ -2,18 +2,17 @@ const express = require('express')
 const cron = require('node-cron')
 const mail = require('./jobs/mailSender')
 const mongoose = require('mongoose')
+const TaskController = require('./controller/TaskController')
 require('dotenv').config()
-
+const bodyparser = require('body-parser')
 const app = express();
-
+app.use(bodyparser.json())
 app.get('/',(req,res,next)=> {
     res.status(200).send(
         'voila'
     )
 })
-app.post('/create',(req,res,next) => {
-
-})
+app.post('/create',TaskController.create)
 
 app.get('all/jobs',(req,res,next)=> {
 
@@ -27,9 +26,10 @@ app.post('/reschedule',(req,res,next)=> {
 
 })
 cron.schedule("*/4 * * * * *",()=> {
-    mail.sender()
+    // mail.sender()
 })
-mongoose.connect(process.env.URI,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=> {
+mongoose.connect(process.env.uri,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=> {
+    console.log('connected')
     app.listen(3000,()=> {
         console.log('listening on port 3000')
     })
