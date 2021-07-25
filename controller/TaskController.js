@@ -33,5 +33,10 @@ exports.create = async(req,res,next) => {
 
 exports.addScheduler = async(req,res,next) => {
     const userEmail = req.body.userEmail
-    
+    const userFound = await User.findOne({
+        email:userEmail
+    }).exec()
+    if(userFound) {
+        console.log(userFound)
+    }
 }
