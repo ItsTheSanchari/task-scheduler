@@ -6,7 +6,8 @@ const TaskController = require('./controller/TaskController')
 require('dotenv').config()
 const bodyparser = require('body-parser')
 const app = express();
-app.use(bodyparser.json())
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.get('/',(req,res,next)=> {
     res.status(200).send(
         'voila'
