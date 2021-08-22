@@ -1,4 +1,5 @@
 const User = require("../Models/User")
+const Scheduler = require("../Models/Scheduler")
 
 exports.create = async(req,res,next) => {
 
@@ -37,6 +38,17 @@ exports.addScheduler = async(req,res,next) => {
         email:userEmail
     }).exec()
     if(userFound) {
-        console.log(userFound)
+       const existingScheduler = await Scheduler.findOne({
+           userId: userFound._id
+       }).exec()
+       if(!existingScheduler) {
+          const newScheduler =  await new Scheduler({
+               userId:userFound._id
+           }).save()
+           res.status(200).json({
+               msg:'Yay! new scheduler created'
+           })
+       }
+       
     }
 }
