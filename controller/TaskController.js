@@ -1,5 +1,6 @@
 const User = require("../Models/User")
 const Scheduler = require("../Models/Scheduler")
+const Job = require("../Models/Job")
 
 exports.create = async(req,res,next) => {
 
@@ -52,3 +53,13 @@ exports.addScheduler = async(req,res,next) => {
        
     }
 }
+exports.getAllJobs = async(req,res,next) => {
+    try {
+        const allJobs = await Job.find()
+        console.log(allJobs)
+    } catch(error) {
+        console.log(error)
+    }
+    
+}
+

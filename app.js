@@ -15,14 +15,12 @@ app.get('/',(req,res,next)=> {
 })
 app.post('/create',TaskController.create)
 app.post('/create/scheduler',TaskController.addScheduler)
-
-app.get('all/jobs',(req,res,next)=> {
-
-})
-
 app.get('all/failed/jobs',(req,res,next)=> {
 
 })
+app.get('/all/jobs',TaskController.getAllJobs)
+
+
 
 app.post('/reschedule',(req,res,next)=> {
 
