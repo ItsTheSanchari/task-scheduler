@@ -56,9 +56,13 @@ exports.addScheduler = async(req,res,next) => {
 exports.getAllJobs = async(req,res,next) => {
     try {
         const allJobs = await Job.find()
-        console.log(allJobs)
+        res.status(200).json({
+            jobs:allJobs
+        })
     } catch(error) {
-        console.log(error)
+        res.status(400).json({
+            msg:'Oops! SOmething went wrong'
+        })
     }
     
 }
