@@ -31,7 +31,7 @@ exports.create = async(req,res,next) => {
         console.log('error occurred while creating a user',error)
     } 
 }
-
+//cretes scheduler wrt each user
 exports.addScheduler = async(req,res,next) => {
     const userEmail = req.body.userEmail
     const userFound = await User.findOne({
